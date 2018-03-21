@@ -25,6 +25,7 @@ namespace JsonForm
                 
                 string url = "https://gist.githubusercontent.com/pictos/70aa4fcc4fad5e48d28c933f42fd3a12/raw/d32457662a06fbff87625eb9e61bf7f89a909f69/teste.json";
                 json = await Client.GetStringAsync(url);
+
                 await Conversation.SendAsync(activity, JsonRootDialog);
             }
             else
