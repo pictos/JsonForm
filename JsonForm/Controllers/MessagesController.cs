@@ -73,14 +73,23 @@ namespace JsonForm
                     try
                     {
                         var fim = await order;
-                        await context.PostAsync("Processando o pedido");
+                        var prop = fim.Properties();
+
+                        foreach (var teste in prop)
+                        {
+                            await context.PostAsync($"As propriedades: {teste}"); //Retorna propriedade e valor
+                            await context.PostAsync(teste.Value.ToString()); // Retorna apenas o valor
+                        }
+                        //var item = fim.First;
+                        ////item.Values("FootLong");
+                        await context.PostAsync("Estou no Do...");
                     }
                     catch (FormCanceledException<JObject> e)
                     {
 
                         string resposta;
                         if (e.InnerException == null)
-                            resposta = $"VocÊ saiu no {e.Last}, talvez queira terminar o pedido depois";
+                            resposta = $"Você saiu no {e.Last}, talvez queira terminar o pedido depois";
                         else
                             resposta = "Desculpe, ocorreu algum problema interno. Por favor tente novamente";
 
